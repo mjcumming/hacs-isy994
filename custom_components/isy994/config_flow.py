@@ -312,8 +312,13 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
 
-class OptionsFlowHandler(config_entries.OptionsFlowWithConfigEntry):
-    """Handle a option flow for ISY/IoX."""
+class OptionsFlowHandler(config_entries.OptionsFlow):
+    """Handle a option flow for ISY/IoX.
+
+    OptionsFlowWithConfigEntry was removed in HA 2025.12; self.config_entry
+    is injected by OptionsFlow. Docs:
+    https://developers.home-assistant.io/blog/2024/11/12/options-flow/
+    """
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
